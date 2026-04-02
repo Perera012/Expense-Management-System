@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Expenses</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #eef1f4;
+            color: #1f2933;
+        }
+
+        .page-box {
+            width: 80%;
+            margin: 40px auto;
+            background-color: #fffdf8;
+            border: 2px solid #d8dee6;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-header {
+            background-color: #243447;
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        .content-area {
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #243447;
+            color: white;
+            padding: 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #d8dee6;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f5ef;
+        }
+
+        tr:hover {
+            background-color: #f0ece2;
+        }
+
+        .btn-row {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            margin: 6px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .btn-home {
+            background-color: #d9a441;
+            color: white;
+        }
+
+        .btn-home:hover {
+            background-color: #bf8d31;
+        }
+
+        .empty {
+            text-align: center;
+            color: #5c6b77;
+            font-size: 16px;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-box">
+        <div class="page-header">
+            <h1>Stored Expense Records</h1>
+        </div>
+        <div class="content-area">
+    {% if expenses %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Cost (GBP)</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Open</th>
+            <th>Action</th>
+        </tr>
+
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e.id }}</td>
+            <td>{{ e.date }}</td>
+            <td>{{ e.cost_gbp }}</td>
+            <td>{{ e.description }}</td>
+            <td>{{ e.expense_type }}</td>
+
+            <td>
+                <a href="/expenses/{{ e.id }}" class="btn-open">Open</a>
+            </td>
+
+            <td>
+                <form action="{{ url_for('delete_expense', id=e.id) }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p class="empty">No expense records are available.</p>
+    {% endif %}
+
+    <div class="btn-row">
+        <a href="/add" class="btn btn-add">Add Expense</a>
+        <a href="/" class="btn btn-home">Return Home</a>
+    </div>
+</div>
+   
+</div> 
+</body>
+</html>

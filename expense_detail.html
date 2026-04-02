@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Details</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #eef1f4;
+            color: #1f2933;
+        }
+
+        .page-box {
+            width: 60%;
+            margin: 45px auto;
+            background-color: #fffdf8;
+            border: 2px solid #d8dee6;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-header {
+            background-color: #243447;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .detail-area {
+            padding: 30px 35px;
+        }
+
+        .detail-row {
+            margin-bottom: 16px;
+            padding: 14px 16px;
+            background-color: #f7f5ef;
+            border: 1px solid #d8dee6;
+            border-radius: 8px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #243447;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            color: #2f3e4d;
+        }
+
+        .btn-row {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 20px;
+            margin: 6px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .btn-back {
+            background-color: #d9a441;
+            color: white;
+        }
+
+        .btn-back:hover {
+            background-color: #bf8d31;
+        }
+
+        .not-found {
+            text-align: center;
+            color: #5c6b77;
+            font-size: 16px;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-box">
+        <div class="page-header">
+            <h1>Expense Details</h1>
+        </div>
+
+        <div class="detail-area">
+            {% if expense %}
+                <div class="detail-row">
+                    <span class="label">Record ID</span>
+                    <span class="value">{{ expense.id }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Expense Date</span>
+                    <span class="value">{{ expense.date }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Amount in GBP</span>
+                    <span class="value">{{ expense.cost_gbp }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Expense Description</span>
+                    <span class="value">{{ expense.description }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Expense Category</span>
+                    <span class="value">{{ expense.expense_type }}</span>
+                </div>
+            {% else %}
+                <p class="not-found">Expense record not found.</p>
+            {% endif %}
+
+            <div class="btn-row">
+                <a href="/" class="btn btn-back">Return Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Management System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #eef1f4;
+            color: #1f2933;
+        }
+
+        .page-box {
+            width: 80%;
+            margin: 40px auto;
+            background-color: #fffdf8;
+            border: 2px solid #d8dee6;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-header {
+            background-color: #243447;
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .button-row {
+            text-align: center;
+            padding: 25px 20px 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 6px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .btn-add {
+            background-color: #243447;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background-color: #1b2836;
+        }
+
+        .btn-view {
+            background-color: #d9a441;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background-color: #bf8d31;
+        }
+
+        .content-area {
+            padding: 25px 30px 35px;
+        }
+
+        h2 {
+            color: #243447;
+            margin-bottom: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #243447;
+            color: white;
+            padding: 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #d8dee6;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f5ef;
+        }
+
+        tr:hover {
+            background-color: #f0ece2;
+        }
+
+        .empty {
+            text-align: center;
+            color: #5c6b77;
+            font-size: 16px;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-box">
+        <div class="page-header">
+            <h1>Expense Management System</h1>
+        </div>
+
+        <div class="button-row">
+            <a href="/add" class="btn btn-add">Create Expense Record</a>
+            <a href="/expenses" class="btn btn-view">View All Expenses</a>
+        </div>
+
+        <div class="content-area">
+            <h2>Recent Expense List</h2>
+
+            {% if expenses %}
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Cost (GBP)</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                </tr>
+
+                {% for e in expenses %}
+                <tr>
+                    <td>{{ e.id }}</td>
+                    <td>{{ e.date }}</td>
+                    <td>{{ e.cost_gbp }}</td>
+                    <td>{{ e.description }}</td>
+                    <td>{{ e.expense_type }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+                <p class="empty">No expenses have been added yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
